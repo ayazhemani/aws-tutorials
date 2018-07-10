@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random 8-Ball Generator</title>
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#Submit').click(function() {
+        $('#quote').text("");
+        let request = new XMLHttpRequest();
+        let url = 'https://x8ezjy4ene.execute-api.us-east-2.amazonaws.com/version1/customeightball';
+        request.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                let response = JSON.parse(this.responseText);
+                $('#quote').text(response.body.result);
+            }
+        }
+        request.open("POST", url, true);
+        request.send();
+    });
+});
+</script>
+
+<button id="Submit">Submit</button>
+<p id="quote"></p>
+
+</body>
+</html>
