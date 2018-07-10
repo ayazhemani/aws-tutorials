@@ -143,6 +143,7 @@ $(document).ready(function() {
 * Now we must change the lambda response to include the requisite headers for the HTTP response.
 
 ###Task 02 - Modify the Lambda for HTTP Responses
+
 1. Include HTTP headers in your lambda. Change your _return_ statement to return the full HTTP response:
 
 ```python

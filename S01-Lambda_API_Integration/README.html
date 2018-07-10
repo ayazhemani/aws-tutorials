@@ -1159,6 +1159,7 @@ body .markdown-body
 <li>Under <strong>Actions</strong> select <em>Create Method</em></li>
 <li>Select <em>POST</em> and click the check box to confirm</li>
 <li>Select the <strong>Integration Type</strong> as <em>Lambda Function</em></li>
+<li>Enable <strong>Lambda Proxy integration</strong></li>
 <li>In the field <strong>Lambda Function</strong>, type <em>customEightBall</em></li>
 <li>Select <strong>Save</strong> then <strong>OK</strong> to provide permissions to the API Gateway</li>
 </ul>
@@ -1277,10 +1278,10 @@ No &lsquo;Access-Control-Allow-Origin&rsquo; header is present on the requested 
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">response</span>
 </pre></div>
-2. Test your lambda against <em>testHelloWorldDefault</em> and verify that a random quote is returned
+2. Test your lambda against <em>testHelloWorldDefault</em> and verify that a random quote is returned. An example is as follows:
 <div class="codehilite"><pre><span class="err">Response:</span>
 <span class="p">{</span>
-  <span class="nt">&quot;body&quot;</span><span class="p">:</span> <span class="s2">&quot;{\&quot;result\&quot;: \&quot;Never put twinkies on your pizza\&quot;}&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;body&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;Never put twinkies on your pizza&quot;</span><span class="p">},</span>
   <span class="nt">&quot;headers&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="nt">&quot;Access-Control-Allow-Origin&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
     <span class="nt">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
@@ -1288,4 +1289,9 @@ No &lsquo;Access-Control-Allow-Origin&rsquo; header is present on the requested 
   <span class="p">},</span>
   <span class="nt">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">200</span>
 <span class="p">}</span>
-</pre></div></p></article></body></html>
+</pre></div>
+3. Enable CORS for your API Gateway Resource
+    * Select the <em>/customeightball</em> resource, click the <strong>Actions</strong> button, and select <strong>Enable CORS</strong>
+    * Proceed with defaults and click <strong>Enable CORS and replace existing CORS headers</strong>
+    * Redeploy your API to <em>version1</em>
+4. Reload the <em>random8BallGenerator.html</em> file and click <strong>Submit</strong>. You should now see a quote displayed.</p></article></body></html>
