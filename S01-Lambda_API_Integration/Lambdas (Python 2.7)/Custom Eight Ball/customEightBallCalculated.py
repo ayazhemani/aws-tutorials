@@ -2,7 +2,7 @@ import random
 
 def lambda_handler(event, context):
     if event.get("calculated_float"):
-        rand_float = event["calculated_float"]
+        rand_float = float(event.get("calculated_float"))
     else:
         rand_float = random.random()
     millenial_quotes = [

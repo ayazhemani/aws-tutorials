@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Random 8-Ball Generator</title>
+    <title>Custom 8-Ball Generator</title>
 </head>
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -10,15 +10,21 @@ $(document).ready(function() {
     $('#Submit').click(function() {
         $('#quote').text("");
         let request = new XMLHttpRequest();
-        let url = 'https://x8ezjy4ene.execute-api.us-east-2.amazonaws.com/version1/customeightball';
+        let url = 'https://your_API_ID.execute-api.your_region.amazonaws.com/your_stage_name/your_resource_name';
+        let new_event = {"calculated_float": $("#calculated_float").val()};
         request.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
                 let response = JSON.parse(this.responseText);
-                $('#quote').text(response.body.result);
+                console.log(response)
+                let response_body = JSON.parse(response.body);
+                console.log(response_body)
+                $('#quote').text(response_body.result);
             }
         }
+
         request.open("POST", url, true);
-        request.send({"calculated_float": $('#calculated_float').val()});
+        console.log(JSON.stringify(new_event))
+        request.send(JSON.stringify(new_event));
     });
 });
 </script>
@@ -33,3 +39,4 @@ $(document).ready(function() {
 
 </body>
 </html>
+

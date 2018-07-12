@@ -3,7 +3,7 @@ import json
 
 def lambda_handler(event, context):
     if event.get("calculated_float"):
-        rand_float = event["calculated_float"]
+        rand_float = float(event.get("calculated_float"))
     else:
         rand_float = random.random()
     millenial_quotes = [
@@ -16,8 +16,8 @@ def lambda_handler(event, context):
 
     headers = {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": '*',
-        "Access-Control-Allow-Credentials": 'true'
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": "true"
     }
     body = {
         "result": result
@@ -25,6 +25,6 @@ def lambda_handler(event, context):
     response = {
         "statusCode": 200,
         "headers": headers,
-        "body": body
+        "body": json.dumps(body)
     }
     return response

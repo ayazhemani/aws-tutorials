@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Random 8-Ball Generator</title>
+    <title>Secure 8-Ball Generator</title>
 </head>
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -11,23 +11,33 @@ $(document).ready(function() {
         $('#quote').text("");
         let request = new XMLHttpRequest();
         let url = 'https://your_API_ID.execute-api.your_region.amazonaws.com/your_stage_name/your_resource_name';
+        let new_event = {"calculated_float": $("#calculated_float").val()};
         request.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
                 let response = JSON.parse(this.responseText);
-                console.log(response);
+                console.log(response)
                 let response_body = JSON.parse(response.body);
-                console.log(response_body);
+                console.log(response_body)
                 $('#quote').text(response_body.result);
             }
         }
+
         request.open("POST", url, true);
-        request.send();
+        request.setRequestHeader("x-api-key", "<API_KEY_HERE>")
+        console.log(JSON.stringify(new_event))
+        request.send(JSON.stringify(new_event));
     });
 });
 </script>
 
+<form>
+    Calculated Float: <input type="text" id="calculated_float">
+</form>
+
 <button id="Submit">Submit</button>
 <p id="quote"></p>
 
+
 </body>
 </html>
+
